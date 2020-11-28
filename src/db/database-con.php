@@ -41,7 +41,7 @@ class Database{
             echo die(" Database connection failed: " . mysqli_connect_error());
         }else{
             echo " Database connection was successful";
-            $selectedDB = mysqli_select_db($conn, $this->dbName,);
+            $selectedDB = mysqli_select_db($conn, $this->dbName);
 
             if (!$selectedDB) {
                 echo die("Select failed: " . mysqli_select_error());
@@ -70,5 +70,3 @@ class Database{
 }
 
 $customDB = new Database();
-
-// $customDB->connectDB();
