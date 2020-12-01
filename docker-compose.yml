@@ -10,9 +10,9 @@ services:
     volumes:
       - ./src:/var/www/html
       - ./php.ini:/usr/local/etc/php/conf.d/30-custom.ini
-    environment:
-      DATABASE_URL: webdb://admin@mariadb/db1
-        - ALLOW_OVERRIDE=true
+    # environment:
+    #   DATABASE_URL: webdb://admin@mariadb/db1
+    #     - ALLOW_OVERRIDE=true
     links:
       - maria-db
 

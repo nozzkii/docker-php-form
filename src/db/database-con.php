@@ -2,27 +2,37 @@
 
 class Database{
 
-    private $dbUser = "ahdmin";
-    private $dbPw = "strongpassword";
-    private $dbServer = "maria-db";
-    private $dbName = "mainDB";
+    private $dbUser;
+    private $dbPw;
+    private $dbServer;
+    private $dbName;
     private $connection;
 
-    function __construct(){
+    function __construct($propUser="ahdmin", $propPW="strongpassword", $propServer="maria-db", $propName="mainDB"){
+        $this->dbUser = $propUser;
+        $this->dbPw = $propPW;
+        $this->dbServer = $propServer;
+        $this->dbName = $propName;
         $this->connectDB();
-        
+    }
+
+    public function __get($property){
+        echo "<br>Asked for value of " . $property . ", value is " . $this->$property;
     }
 
     public function __set($dbProperty, $value){
         switch($dbProperty){
-            case "user":
+            case "dbUser":
                 $this->dbUser = $value;
             break;
-            case "pw":
+            case "dbPw":
                 $this->dbPw = $value;
             break;
-            case "server":
-                $this->sql = $value;
+            case "dbServer":
+                $this->dbServer = $value;
+            break;
+            case "dbName":
+                $this->dbName = $value;
             break;
             default:
             echo "Property doesn't exist";
@@ -38,15 +48,15 @@ class Database{
         $conn = $this->connection;
 
         if(!$this->connection){
-            echo die(" Database connection failed: " . mysqli_connect_error());
+            echo die("<br>Database connection failed: " . mysqli_connect_error());
         }else{
-            echo " Database connection was successful";
+            echo "<br>Database connection was successful";
             $selectedDB = mysqli_select_db($conn, $this->dbName);
 
             if (!$selectedDB) {
-                echo die("Select failed: " . mysqli_select_error());
+                echo die("<br>Select failed: " . mysqli_select_error());
             } else {
-                echo " Select was successfully";
+                echo "<br>Select was successfully";
             }
         }
 
@@ -59,9 +69,9 @@ class Database{
         
 
         if(mysqli_query($conn, $sql) === true){
-            echo "<p>Your query was successful</p>";
+            echo "<br><p>Your query was successful</p>";
         }else{
-            echo "Your query failed" . $conn->error;
+            echo "<br>Your query failed" . $conn->error;
             }
         }
         }
@@ -70,3 +80,4 @@ class Database{
 }
 
 $customDB = new Database();
+$customDB->dbServer;
