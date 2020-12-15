@@ -1,31 +1,24 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  php-web:
-    image: web-form
-    build:
-      context: .
-    ports: 
-      - "80:80"
+  web:
+    image: mywebsite
+    build: .
+    links:
+      - db
     volumes:
       - ./src:/var/www/html
-      - ./php.ini:/usr/local/etc/php/conf.d/30-custom.ini
-    # environment:
-    #   DATABASE_URL: webdb://admin@mariadb/db1
-    #     - ALLOW_OVERRIDE=true
-    links:
-      - maria-db
-
-  maria-db:
-    image: mariadb:latest
     ports:
-    - 3306:3306
-    volumes:
+      - 8999:80
+  db:
+    image: mariadb:latest
+    volumes: 
     - mariadb:/var/lib/mysql
+    ports:
+      - 3306:3306
     env_file: db.env
-    environment:
+    environment: 
       NODE_ENV: development
 
 volumes:
   mariadb:
-

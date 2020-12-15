@@ -12,8 +12,6 @@ require_once "db/database-connection.php";
 <body>
 <h1>BESTE SEITE</h1>
 
-
-
 <?php
 $signIn = new Form('signIn', "signIn");
 echo $_SESSION["message"];

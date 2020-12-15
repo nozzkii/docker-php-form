@@ -1,7 +1,7 @@
 <?php
 session_start();
-include 'autoload.php';
-spl_autoload_register('my_extensions');
+include 'db/database-connection.php';
+include 'extension/form.php';
 
 ///MVC refactoring
 // require_once "core/Application.php";
@@ -25,11 +25,11 @@ spl_autoload_register('my_extensions');
 </head>
 <body>
 <?php
-$register = new extension/Form('register', "register");
+$register = new Form('register', "register");
 echo $_SESSION["Message"];
 session_unset();
 ?>
-<script type='text/javascript' src='js/main.js'></script>
+<script type='text/javascript' src='js/localStorage.js'></script>
 </body>
 </html>
 

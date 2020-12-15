@@ -1,12 +1,11 @@
 $(function(){
-    
-  localStorage.setItem("lastname", "Smith");
 // Check browser support
-$("form[name='register']").on('submit', function(event) {
-  event.preventDefault();
+// $("form[name='signIn']").on('submit', function(event) {
+  // event.preventDefault();
+function myFunction(){
 if (typeof(Storage) !== "undefined") {
     // Store
-
+    if (this.readyState == 4 && this.status == 200) {
     var $firstName = $("input[name='firstName']").val();
     var $lastName = $("input[name='lastName']").val();
     var $streetAdress = $("input[name='streetAdress']").val();
@@ -23,16 +22,12 @@ if (typeof(Storage) !== "undefined") {
     localStorage.setItem('region', $region);
     localStorage.setItem('postal', $postal);
     localStorage.setItem('city', $city);
-    
-  // Retrieve
-   // document.getElementById("result").innerHTML = localStorage.getItem("lastname");
-  } 
+      }
+}
   else {
     document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
   }
-
-  this.submit();
-});
+}
 
 
 $("button#logout").on('click', function() {

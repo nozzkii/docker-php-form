@@ -61,14 +61,11 @@ class Database{
     }
 
     private function connectDB(){
-        $this->connection = mysqli_connect($this->dbServer, $this->dbUser, $this->dbPw);
+        $this->connection = mysqli_connect($this->dbServer, $this->dbUser, $this->dbPw, $this->dbName);
         $conn = $this->connection;
 
         if(!$this->connection){
-            // echo die("<br>Database connection failed: " . mysqli_connect_error());
-        }else{
-            // echo "<br>Database connection was successful";
-            mysqli_select_db($conn, $this->dbName);
+            echo die("<br>Database connection failed: " . mysqli_connect_error());
         }
     }
 
@@ -92,9 +89,7 @@ class Database{
             PRIMARY KEY (ID)
         )"; 
         
-        if(mysqli_query($conn, $sql) === true){
-            // echo "true";
-        }else{
+        if(mysqli_query($conn, $sql) === false){
             global $queryFail;
             echo $queryFail . $conn->error;
         }
@@ -121,7 +116,7 @@ class Database{
                 echo $queryFail . $conn->error;
                 }
             }
-        mysqli_close($conn);
+        //mysqli_close($conn);
         }
         
 
@@ -146,7 +141,7 @@ class Database{
         }else{
             echo "<br>Your query" . $sql . " " . $conn->error;
             }
-        mysqli_close($conn);
+        //mysqli_close($conn);
     }
 
 }

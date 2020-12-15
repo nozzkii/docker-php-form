@@ -1,8 +1,7 @@
 <?php
 
 require_once "db/database-connection.php";
-$customDB->fetchData($_POST['userName'], $_POST['password']);
-
+$customDB->fetchData();
 ?>
 <!DOCTYPE>
 <html>
@@ -15,12 +14,14 @@ $customDB->fetchData($_POST['userName'], $_POST['password']);
 </head>
 <body>
 <?php
-if (!$customDB->userName == $_POST['userName'] || !password_verify($_POST['password'], $customDB->hashedPassword)) {
-    header("Location: user.php");
-   }else{
 
-echo $customDB->firstName;
-}?>
+$info = array('FirstName' => $customDB->firstName, 'LastName' => $customDB->lastName, 'StreetAdress' =>  $customDB->streetAdress, 'SecondStreetAdress' => $customDB->secondStreetAdress, 'City' => $customDB->city,  'Region' => $customDB->region, 'Postal' => $customDB->postal, 'Country' => $customDB->country);
+echo'<ul>';
+foreach ($info as $key => $value){
+    echo '<li>' . $key . ': '. $value.'</li>';
+}
+echo'</ul>';
+?>
 <button type="button" id="logout">LogOut</button>
 <script type='text/javascript' src='js/main.js'></script>
 </body>
