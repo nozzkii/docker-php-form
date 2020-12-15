@@ -1,69 +1,51 @@
 <?php
 
-class Form
-{
+class Form{
+    protected $id, $name, $formType;
+    public static $numberOfForms;
 
-    protected $name;
-    protected $id;
-    public static $numberOfForms = 0;
-    protected $formType;
-
-    function __construct($paraName, $paraForm){
-        $this->name = $paraName;
-        $this->formType = $paraForm;
-        $this->id = uniqid('form_id_');
+    public function __construct($propName, $propFormType){
+        $this->id = uniqid('form_id');
+        $this->name = $propName;
+        $this->formType = $propFormType;
         Form::$numberOfForms++;
-        $this->displayForm($this->formType);
-    }   
-
-    public function __get($property){
-        return " Value of " . $property . " is " . $this->$property; 
+        $this->select($this->formType);
     }
-
-    public function __set($args, $value){
-        
-        switch($args){
-            case 'formType':
-                $this->formType=$value;
-            case 'name':
-                $this->name=$value;
-            default:
-                echo $args . 'not found';
-        }
-        echo "you have set a value";
-    }
-
-    public function displayForm($formType = 'Contact'){ 
-        switch($formType){
-            case 'contact':
-                echo '<form action="received.php" method="POST">
-                <div class="form-group">
-                <label>First Name *</label>
-                <input type="text" name="firstName" required>
-                </div>
-                <div class="form-group">
-                <label>Last Name *</label>
-                <input type="text" name="lastName" required>
-                </div>
-                <div class="form-group" required>
-                <label>Age *</label>
-                <input type="number" name="age" required>
-                </div>
-                <div class="form-group">
-                <label>EMAIL *</label>
-                <input type="email" name="email" required>
-                </div>
-                <input class="btn btn-primary" type="submit" name="submit" value="SEND" required>
-                </form>';
-            break;
-            case 'upload':
-                echo 'upload form';
-            break;
-            default:
-                echo "nothing found";
-        }
-    }
-
 
     
-}   
+
+    public function select($propType){
+        switch($propType){
+        case "register":
+                echo "
+                <form method='POST' name='register' action='received.php'>
+                <input name='firstName' type='text' placeholder='Name'>
+                <input name='lastName' type='text' placeholder='Nachname'>
+                <input name='streetAdress' type='text' placeholder='Adresse'>
+                <input name='secondStreetAdress' type='text' placeholder='2 Adresse'> 
+                <input name='city' type='text' placeholder='Stadt'>
+                <input name='region' type='text' placeholder='Region'>
+                <input name='country' type='text' placeholder='Land'>
+                <input name='postal' type='text' placeholder='Postanschrift' pattern='\d*' minlength='5' maxlength='5'>
+                <input name='userName' type='text' placeholder='Benutzername' required>
+                <input type='password' name='password' placeholder='Passwort' required>
+                <input type='submit' name='submitRegister' value='Senden'>
+                </form>
+                ";
+        break;
+        case "signIn":
+            echo "
+            <form method='POST' action='account.php'>
+            <input name='userName' type='text' placeholder='Benutzername'>
+            <input type='password' name='password' required>
+            <input type='submit' name='submit' value='Senden'>
+            </form>
+            ";
+        break;
+        default:
+        echo "Form not found";
+        }
+    }
+}
+
+?>

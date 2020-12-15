@@ -1,10 +1,15 @@
 <?php
 session_start();
 
-header("Location: index.php");
-include "db/database-con.php";
 
-if(!empty($_POST["firstName"])&& $_POST["submit"]){
-    $_SESSION["Message"] = "Thank you " . $_POST["firstName"] . " for sending us a message";
+require_once "db/database-connection.php";
+$customDB->fetchData();
+
+if(!$customDB->userName == $_POST['userName']){
+    header("Location: user.php");
     $customDB->sendData();
+}else{
+    $_SESSION["Message"]="User already exist";
+    header("Location: index.php");
 }
+
