@@ -1,11 +1,10 @@
 $(function(){
-// Check browser support
-// $("form[name='signIn']").on('submit', function(event) {
-  // event.preventDefault();
-function myFunction(){
-if (typeof(Storage) !== "undefined") {
+
+$("form[name='register']").on('submit', function(event) {
+    localStorage.clear();
+   event.preventDefault();
+//if (typeof(Storage) !== "undefined") {
     // Store
-    if (this.readyState == 4 && this.status == 200) {
     var $firstName = $("input[name='firstName']").val();
     var $lastName = $("input[name='lastName']").val();
     var $streetAdress = $("input[name='streetAdress']").val();
@@ -14,20 +13,25 @@ if (typeof(Storage) !== "undefined") {
     var $region = $("input[name='region']").val();
     var $postal = $("input[name='postal']").val();
 
+// Put the object into storage
+    //localStorage.setItem('testObject', JSON.stringify(testObject));
     // Save variables in localStorage
     localStorage.setItem('firstName', $firstName);
     localStorage.setItem('lastName', $lastName);
     localStorage.setItem('streetAdress', $streetAdress);
     localStorage.setItem('lineAdress', $lineAdress);
-    localStorage.setItem('region', $region);
-    localStorage.setItem('postal', $postal);
     localStorage.setItem('city', $city);
-      }
-}
-  else {
+    localStorage.setItem('$region', $region);
+    localStorage.setItem('postal', $postal);
+    location.pathname = '/login.php'
+//}
+  if(typeof(Storage) == "undefined") {
     document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
   }
-}
+
+
+    return false;
+});
 
 
 $("button#logout").on('click', function() {
