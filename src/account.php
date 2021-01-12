@@ -16,13 +16,16 @@ $customDB->fetchData();
 <?php
 
 $info = array('FirstName' => $customDB->firstName, 'LastName' => $customDB->lastName, 'StreetAdress' =>  $customDB->streetAdress, 'SecondStreetAdress' => $customDB->secondStreetAdress, 'City' => $customDB->city,  'Region' => $customDB->region, 'Postal' => $customDB->postal, 'Country' => $customDB->country);
+
 echo'<ul>';
 foreach ($info as $key => $value){
     echo '<li>' . $key . ': '. $value.'</li>';
 }
 echo'</ul>';
 ?>
-<button type="button" id="logout">LogOut</button>
-<script type='text/javascript' src='js/main.js'></script>
+
+<div id="output">INFO:</div>
+<button type="button" id="logout">OK</button>
+
 </body>
 </html>

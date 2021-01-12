@@ -12,7 +12,7 @@ class Form{
         $this->select($this->formType);
     }
 
-    
+
 
     public function select($propType){
         switch($propType){
@@ -28,7 +28,7 @@ class Form{
                 <input name='country' type='text' placeholder='Land'>
                 <input name='postal' type='text' placeholder='Postanschrift' pattern='\d*' minlength='5' maxlength='5'>
                 <input name='userName' type='text' placeholder='Benutzername' required>
-                <input type='password' name='password' placeholder='Passwort' required>
+                <input type='password' name='password' placeholder='Passwort' pattern='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$' minlength='' required>
                 <input type='submit' name='submitRegister' value='Senden'>
                 </form>
                 ";
