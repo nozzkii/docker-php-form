@@ -101,9 +101,7 @@ class Database{
         $password = $_POST['password'];
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         
-        
-        if(isset($_POST["submitRegister"])){
-
+        if(isset($hashed_password)){
         $sql = "INSERT INTO Register(FirstName, LastName, StreetAdress, SecondStreetAdress, City, Region, Postal, Country, UserName, UserPassword) 
         Values ('$_POST[firstName]', '$_POST[lastName]', '$_POST[streetAdress]', '$_POST[secondStreetAdress]', '$_POST[city]', '$_POST[region]', 
         '$_POST[postal]', '$_POST[country]', '$_POST[userName]', '$hashed_password')";
@@ -122,26 +120,38 @@ class Database{
 
     public function fetchData(){
         $conn = $this->connection;
+        //$userNameIn = $_POST['userName'];
         $sql = "SELECT FirstName, LastName, StreetAdress, SecondStreetAdress, City, Region, Postal, Country, UserName, UserPassword FROM `Register` WHERE UserName='$_POST[userName]'";
         
     if(mysqli_query($conn, $sql) !== FALSE){
             global $querySucess;
             $result = mysqli_query($conn, $sql);
-            $followingdata = $result->fetch_assoc();
-            $this->userName =  $followingdata['UserName'];
-            $this->hashedPassword =  $followingdata['UserPassword'];
-            $this->firstName =  $followingdata['FirstName'];
-            $this->lastName =  $followingdata['LastName'];
-            $this->streetAdress =  $followingdata['StreetAdress'];
-            $this->secondStreetAdress =  $followingdata['SecondStreetAdress'];
-            $this->city =  $followingdata['City'];
-            $this->region =  $followingdata['Region'];
-            $this->postal =  $followingdata['Postal'];
-            $this->country =  $followingdata['Country'];
+            $followingData = $result->fetch_assoc();
+            $this->userName =  $followingData['UserName'];
+            $this->hashedPassword =  $followingData['UserPassword'];
+            $this->firstName =  $followingData['FirstName'];
+            $this->lastName =  $followingData['LastName'];
+            $this->streetAdress =  $followingData['StreetAdress'];
+            $this->secondStreetAdress =  $followingData['SecondStreetAdress'];
+            $this->city =  $followingData['City'];
+            $this->region =  $followingData['Region'];
+            $this->postal =  $followingData['Postal'];
+            $this->country =  $followingData['Country'];
         }else{
             echo "<br>Your query" . $sql . " " . $conn->error;
-            }
+        }
         //mysqli_close($conn);
+    }
+
+    public function checkUserName($searchedString){
+        $conn = $this->connection;
+        $sql = "SELECT UserName FROM `Register` WHERE UserName='$searchedString'";
+        $result = mysqli_query($conn, $sql);
+        $followingData = $result->fetch_assoc();
+        if ($followingData != "") {
+        return True;
+        }
+        return False; 
     }
 
 }
