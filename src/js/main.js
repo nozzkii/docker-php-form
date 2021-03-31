@@ -12,19 +12,19 @@ function register() {
   //event.preventDefault();
   if (window.localStorage !== undefined) {
     // Store
-    var $firstName = $("input[name='firstName']").val();
-    var $lastName = $("input[name='lastName']").val();
-    var $streetAdress = $("input[name='streetAdress']").val();
-    var $secondStreetAdress = $("input[name='secondStreetAdress']").val();
-    var $city = $("input[name='city']").val();
-    var $region = $("input[name='region']").val();
-    var $postal = $("input[name='postal']").val();
-    var $country = $("input[name='country']").val();
-    var $userName = $("input[name='userName']").val();
-    var $password = $("input[name='password']").val();
+    let $firstName = $("input[name='firstName']").val();
+    let $lastName = $("input[name='lastName']").val();
+    let $streetAdress = $("input[name='streetAdress']").val();
+    let $secondStreetAdress = $("input[name='secondStreetAdress']").val();
+    let $city = $("input[name='city']").val();
+    let $region = $("input[name='region']").val();
+    let $postal = $("input[name='postal']").val();
+    let $country = $("input[name='country']").val();
+    let $userName = $("input[name='userName']").val();
+    let $password = $("input[name='password']").val();
 
     // Put the object into storage
-    var $personalData = {
+    let $personalData = {
       'firstName': $firstName,
       'lastName': $lastName,
       'streetAdress': $streetAdress,
@@ -66,8 +66,8 @@ function register() {
 }
 
 function login() {
-  var $userName = $("input[name='userName']").val();
-  var $password = $("input[name='password']").val();
+  let $userName = $("input[name='userName']").val();
+  let $password = $("input[name='password']").val();
   $.ajax({
     type: "POST",
     url: "account.php",
